@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"github.com/mahdi-cpp/api-go-gallery/api"
 )
 
 var (
@@ -20,12 +20,6 @@ func Run() {
 
 	router.Use(CORSMiddleware())
 
-	// Define the file system for serving static files
-	fs := http.Dir("static")
-
-	//Serve static HTML files from the "static" directory
-	router.StaticFS("/v2/ali", fs)
-
 	getRoutes()
 	err = router.Run(":8095")
 	if err != nil {
@@ -37,8 +31,8 @@ func Run() {
 // this way every group of routes can be defined in their own file
 // so this one won't be so messy
 func getRoutes() {
-	v2 := router.Group("/v2")
-	addApiRoutes(v2)
+	v1 := router.Group("/v1")
+	api.AddGalleryRoutes(v1)
 }
 
 func CORSMiddleware() gin.HandlerFunc {

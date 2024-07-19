@@ -21,7 +21,7 @@ func DatabaseInit() {
 		}})
 
 	if err != nil {
-		println("Failed to connect database shopgram.english\"")
+		println("Failed to connect database gallery\"")
 		os.Exit(1)
 	}
 }
