@@ -10,32 +10,22 @@ var (
 	router = gin.Default()
 )
 
-// Run will instagram the server
 func Run() {
-
-	err := router.SetTrustedProxies([]string{"192.168.1.2"})
-	if err != nil {
-		return
-	}
-
 	router.Use(CORSMiddleware())
-
 	getRoutes()
-	err = router.Run(":8095")
-	if err != nil {
-		return
-	}
+	router.Run(":8095")
 }
 
-// getRoutes will create our routes of our entire application
-// this way every group of routes can be defined in their own file
-// so this one won't be so messy
 func getRoutes() {
+
 	v1 := router.Group("/v1")
-	api.AddGalleryRoutes(v1)
+	api.AddChatRoute(v1)
+	api.AddPhotosRoutes(v1)
+	api.AddDownloadRoutes(v1)
 }
 
 func CORSMiddleware() gin.HandlerFunc {
+
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Max-Age", "86400")
