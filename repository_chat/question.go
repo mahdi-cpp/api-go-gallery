@@ -43,9 +43,10 @@ func GetQuestionVoices(folder string) QuestionVoiceDTO {
 		voice.Photo = photos[index]
 		voice.Photo.Key = -1
 		voice.Photo.ThumbSize = 270
-		voice.Photo.Circle = true
-		voice.Photo.PaintWidth = dp(88)
-		voice.Photo.PaintHeight = dp(88)
+		voice.Photo.Crop = 2
+		voice.Photo.Round = int(dp(10))
+		voice.Photo.PaintWidth = dp(95)
+		voice.Photo.PaintHeight = dp(95)
 
 		dto.QuestionVoices = append(dto.QuestionVoices, voice)
 		nameIndex++

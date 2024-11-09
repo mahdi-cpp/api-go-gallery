@@ -1,6 +1,6 @@
 package repository_drawer
 
 func InitDrawers() {
-	GetDrawerPeople("/var/cloud/fa/")
-	GetDrawerMusic("/var/cloud/chat/movie/movie/")
+	GetDrawerPeople("/var/cloud/id/person/")
+	GetDrawerMusic("/var/cloud/music/albums/")
 }

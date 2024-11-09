@@ -16,11 +16,38 @@ import (
 )
 
 var folders = []string{
-	"/var/cloud/bb/",
+
+	"/var/cloud/4/",
+	"/var/cloud/4/thumbnail/",
+
+	"/var/cloud/all/",
+	"/var/cloud/all/thumbnail/",
+
+	"/var/cloud/music/albums/",
+	"/var/cloud/music/albums/thumbnail/",
+
+	"/var/cloud/paris/",
+	"/var/cloud/paris/thumbnail/",
+
+	"/var/cloud/reynardlowell/",
+	"/var/cloud/reynardlowell/thumbnail/",
+
+	"/var/cloud/ikea/",
+	"/var/cloud/ikea/thumbnail/",
+
 	"/var/cloud/fa/",
 	"/var/cloud/wallpaper/",
 
+	"/var/cloud/id/me/",
+	"/var/cloud/id/me/thumbnail",
+	"/var/cloud/id/mahan/",
+	"/var/cloud/id/mahan/thumbnail",
+
+	"/var/cloud/ik/",
+	"/var/cloud/ik/thumbnail",
+
 	"/var/cloud/id/ali/",
+	"/var/cloud/id/ali2/",
 	"/var/cloud/id/cut/",
 	"/var/cloud/id/girl/",
 	"/var/cloud/id/face/",
@@ -28,29 +55,42 @@ var folders = []string{
 	"/var/cloud/id/go/",
 
 	"/var/cloud/chat/movie/movie/",
+
+	"/var/cloud/chat/movie/animation/",
+
+	"/var/cloud/chat/movie/movie/thumbnail/",
+	"/var/cloud/chat/movie/animation/thumbnail/",
+
+	"/var/cloud/camera-sequrity/",
+	"/var/cloud/camera-sequrity/thumbnail/",
+
 	"/var/cloud/chat/pdf/",
 	"/var/cloud/chat/electronic/",
 	"/var/cloud/chat/map/",
 	"/var/cloud/chat/voice/",
 
 	"/var/cloud/call2/",
+	"/var/cloud/call2/thumbnail/",
 
-	"/var/cloud/bb/thumbnail/",
 	"/var/cloud/fa/thumbnail/",
 	"/var/cloud/id/ali/thumbnail/",
+	"/var/cloud/id/ali2/thumbnail/",
 	"/var/cloud/id/cut/thumbnail/",
 	"/var/cloud/id/girl/thumbnail/",
 	"/var/cloud/id/face/thumbnail/",
 	"/var/cloud/id/trip/thumbnail/",
 	"/var/cloud/id/go/thumbnail/",
 
-	"/var/cloud/chat/movie/movie/thumbnail/",
 	"/var/cloud/chat/pdf/thumbnail/",
 	"/var/cloud/chat/electronic/thumbnail/",
 	"/var/cloud/chat/map/thumbnail/",
 	"/var/cloud/chat/voice/thumbnail/",
 
-	"/var/cloud/call2/thumbnail/",
+	"/var/cloud/tinyhome/new/",
+	"/var/cloud/tinyhome/new/thumbnail/",
+
+	"/var/cloud/tinyhome/06/",
+	"/var/cloud/tinyhome/06/thumbnail/",
 }
 
 var iconFolder = "/var/cloud/icons/"

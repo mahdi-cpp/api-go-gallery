@@ -11,16 +11,26 @@ var (
 )
 
 func Run() {
+
 	router.Use(CORSMiddleware())
+
 	getRoutes()
-	router.Run(":8095")
+
+	err := router.Run(":8095")
+	if err != nil {
+		fmt.Println("Error] failed to start Gin server due to: ", err.Error())
+		return
+	}
+
 }
 
 func getRoutes() {
 
 	v1 := router.Group("/v1")
+
 	api.AddChatRoute(v1)
 	api.AddPhotosRoutes(v1)
+	api.AddPhotosHomeRoutes(v1)
 	api.AddDownloadRoutes(v1)
 }
 

@@ -28,8 +28,8 @@ func GetPeoples(folder string) {
 
 	var count = (len(photos) / 4) - 4
 
-	if count > 50 {
-		count = 50
+	if count > 5 {
+		count = 5
 	}
 
 	var index = 0
@@ -62,10 +62,10 @@ func GetPeoples(folder string) {
 		personGroup.Photo3.Round = int(dp(10))
 		personGroup.Photo4.Round = int(dp(10))
 
-		personGroup.Photo1.Crop = true
-		personGroup.Photo2.Crop = true
-		personGroup.Photo3.Crop = true
-		personGroup.Photo4.Crop = true
+		personGroup.Photo1.Crop = 1
+		personGroup.Photo2.Crop = 1
+		personGroup.Photo3.Crop = 1
+		personGroup.Photo4.Crop = 1
 
 		personGroup.Photo1.Key = -1
 		personGroup.Photo2.Key = -1
@@ -84,7 +84,7 @@ func GetPeoples(folder string) {
 		var photoBase model.PhotoBase
 		photoBase = photos[i]
 		photoBase.ThumbSize = 540
-		photoBase.Crop = true
+		photoBase.Crop = 1
 		photoBase.Key = -1
 		peopleDTO.PhotoAnimations = append(peopleDTO.PhotoAnimations, photoBase)
 	}

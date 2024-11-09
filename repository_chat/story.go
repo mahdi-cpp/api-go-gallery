@@ -16,7 +16,7 @@ type StoryDTO struct {
 
 type Story struct {
 	Name  string          `json:"name"`
-	Photo model.PhotoBase `json:"ali"`
+	Photo model.PhotoBase `json:"photo"`
 }
 
 func GetStory(folder string, avatar string) StoryDTO {
@@ -39,8 +39,7 @@ func GetStory(folder string, avatar string) StoryDTO {
 	photo.Width = 200
 	photo.Height = 200
 	photo.ThumbSize = 270
-	photo.Crop = true
-	photo.Round = int(dp(20))
+	photo.Circle = true
 	photo.Key = -1
 	photo.PaintWidth = dp(100)
 	photo.PaintHeight = dp(100)

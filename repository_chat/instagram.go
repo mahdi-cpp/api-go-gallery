@@ -7,7 +7,7 @@ import (
 )
 
 type InstagramPostDTO struct {
-	Caption string            `json:"name"`
+	Caption string            `json:"caption"`
 	Avatar  model.PhotoBase   `json:"avatar"`
 	Photos  []model.PhotoBase `json:"photos"`
 }
@@ -23,9 +23,9 @@ func GetInstagram(folder string, avatar string) InstagramPostDTO {
 	var count = len(photos)
 	var localInstagramPostDTO InstagramPostDTO
 
-	if count > 10 {
-		count = 10
-	}
+	//if count > 10 {
+	//	count = 10
+	//}
 
 	var index = 0
 	var nameIndex = 0
@@ -33,15 +33,18 @@ func GetInstagram(folder string, avatar string) InstagramPostDTO {
 	var photo = model.PhotoBase{}
 	photo.Name = avatar
 	photo.FileType = ".jpg"
-	photo.Width = 200
-	photo.Height = 200
+	photo.Width = 50
+	photo.Height = 50
 	photo.ThumbSize = 270
-	photo.Crop = true
-	photo.Round = int(dp(20))
+	photo.Dx = 20
+	photo.Dy = 20
+	photo.Circle = true
 	photo.Key = -1
-	photo.PaintWidth = dp(100)
-	photo.PaintHeight = dp(100)
+	photo.PaintWidth = dp(33)
+	photo.PaintHeight = dp(33)
 	localInstagramPostDTO.Avatar = photo
+
+	localInstagramPostDTO.Caption = "Mahdi"
 
 	for i := 0; i < count; i++ {
 		if nameIndex >= len(utils.FackNames) {
@@ -51,7 +54,7 @@ func GetInstagram(folder string, avatar string) InstagramPostDTO {
 		var photo = model.PhotoBase{}
 		photo = photos[index]
 		photo.ThumbSize = 540
-		photo.Crop = true
+		photo.Crop = 1
 		photo.Round = 0
 		photo.Key = -1
 		photo.PaintWidth = 1000

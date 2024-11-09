@@ -41,7 +41,7 @@ func GetDrawerPeople(folder string) {
 		photoBase = photos[index]
 		photoBase.Key = -1
 		photoBase.ThumbSize = 540
-		photoBase.Crop = true
+		photoBase.Crop = 1
 		photoBase.Round = int(utils.DP(15))
 		photoBase.PaintWidth = 1080
 		photoBase.PaintHeight = 600

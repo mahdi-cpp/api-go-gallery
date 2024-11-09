@@ -3,6 +3,7 @@ package repository_photos
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"
 	"github.com/mahdi-cpp/api-go-gallery/model"
+	"github.com/mahdi-cpp/api-go-gallery/utils"
 )
 
 var lionDTO LionDTO
@@ -26,14 +27,16 @@ func GetLion(folder string) {
 		var photo = model.PhotoBase{}
 		photo = photos[index]
 		photo.Key = -1
-		photo.Crop = true
-		photo.ThumbSize = 540
+		photo.Crop = 1
+		photo.PaintWidth = float32(utils.ScreenWidth)
+		photo.PaintHeight = float32(utils.ScreenWidth * 1.26)
+
 		lionDTO.Photos = append(lionDTO.Photos, photo)
 		index++
 	}
 
-	lionDTO.Titles = []string{"", "", "", "Videos", "Favourites", "Suggestions", "Crater Lake", "", "", "", "", ""}
-	lionDTO.SubTitles = []string{"", "MEDIA TYPES", "LIBRARY", "Reza", "TRIPS", "", "", "", "", ""}
+	lionDTO.Titles = []string{"Mahdi Abdolmaleki", "Sara Nasiri", "", "Videos", "Favourites", "Suggestions", "Crater Lake", "", "", "", "", ""}
+	lionDTO.SubTitles = []string{"Cameras", "MEDIA TYPES", "LIBRARY", "Favourite", "TRIPS", "", "", "", "", ""}
 
 	var iconsName = []string{"camera_51.png", "favourite_50.png", "camera_photo_51.png", "trip_50.png", "trip_50.png"}
 	for i := 0; i < 5; i++ {

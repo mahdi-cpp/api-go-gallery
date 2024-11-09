@@ -43,7 +43,7 @@ func GetPinned(folder string) {
 		pinned.Name = utils.FackNames[nameIndex]
 		pinned.Photo = photos[index]
 		pinned.Photo.ThumbSize = 270
-		pinned.Photo.Crop = true
+		pinned.Photo.Crop = 1
 		pinned.Photo.Round = int(dp(10))
 		pinned.Photo.Key = -1
 		pinned.Photo.PaintWidth = photoSize

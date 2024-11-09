@@ -9,7 +9,7 @@ type PhotoBase struct {
 	Height      int     `json:"height"`
 	Circle      bool    `json:"circle,omitempty"`
 	Round       int     `json:"round,omitempty"`
-	Crop        bool    `json:"crop,omitempty"`
+	Crop        int     `json:"crop,omitempty"`
 	AspectRatio float32 `json:"aspectRatio,omitempty"`
 	ThumbSize   int     `json:"thumbSize,omitempty"`
 	PaintWidth  float32 `json:"paintWidth,omitempty"`

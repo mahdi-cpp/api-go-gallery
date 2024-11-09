@@ -6,6 +6,7 @@ import (
 )
 
 type GalleryDTO struct {
+	Avatar model.PhotoBase   `json:"avatar"`
 	Photos []model.PhotoBase `json:"photos"`
 }
 
@@ -19,6 +20,10 @@ func GetGalleries(folder string) {
 	var count = len(photos)
 	var index = 0
 
+	//if count > 50 {
+	//	count = 50
+	//}
+
 	for i := 0; i < count; i++ {
 		var photo = model.PhotoBase{}
 		photo = photos[index]
@@ -26,4 +31,17 @@ func GetGalleries(folder string) {
 		galleryDTO.Photos = append(galleryDTO.Photos, photo)
 		index++
 	}
+
+	var photo = model.PhotoBase{}
+	photo.Key = -1
+	photo.Name = "00044"
+	photo.ThumbSize = 540
+	photo.FileType = ".jpg"
+	photo.Width = int(dp(33))
+	photo.Height = int(dp(33))
+	photo.PaintWidth = dp(33)
+	photo.PaintHeight = dp(33)
+	photo.Circle = true
+	galleryDTO.Avatar = photo
+
 }

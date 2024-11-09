@@ -12,24 +12,32 @@ func RestChatV2() map[string]any {
 		"instagramPostDTO3": instagramPostDTO3,
 		"storyDTO":          storyDTO,
 		"movieDTO":          movieDTO,
-		"pdfDTO":            pdfDTO,
-		"electronicDTO":     electronicDTO,
-		"mapDTO":            mapDTO,
-		"questionVoiceDTO":  questionVoiceDTO,
+		"animationDTO":      animationDTO,
+
+		"pdfDTO":           pdfDTO,
+		"electronicDTO":    electronicDTO,
+		"mapDTO":           mapDTO,
+		"questionVoiceDTO": questionVoiceDTO,
+		"cameraDTO":        cameraDTO,
 	}
 }
 
 func InitModels() {
-	instagramPostDTO1 = GetInstagram("/var/cloud/id/girl/", "/var/cloud/call2/far.jpg")
-	instagramPostDTO2 = GetInstagram("/var/cloud/id/cut/", "/var/cloud/call2/nar3.jpg")
-	instagramPostDTO3 = GetInstagram("/var/cloud/fa/", "/var/cloud/call2/01.jpg")
+	instagramPostDTO1 = GetInstagram("/var/cloud/reynardlowell/", "far")
+	instagramPostDTO2 = GetInstagram("/var/cloud/paris/", "narges2")
+	instagramPostDTO3 = GetInstagram("/var/cloud/reynardlowell/", "01")
 
-	storyDTO = GetStory("/var/cloud/bb/", "/var/cloud/call2/01.jpg")
+	storyDTO = GetStory("/var/cloud/fa/", "ma")
+
 	movieDTO = GetMovies("/var/cloud/chat/movie/movie/")
+	animationDTO = GetAnimation("/var/cloud/chat/movie/animation/")
+
 	pdfDTO = GetPdfs("/var/cloud/chat/pdf/")
 	electronicDTO = GetElectronic("/var/cloud/chat/electronic/")
 	mapDTO = GetMaps("/var/cloud/chat/map/")
-	questionVoiceDTO = GetQuestionVoices("/var/cloud/chat/voice/")
+	questionVoiceDTO = GetQuestionVoices("/var/cloud/fa/")
+
+	cameraDTO = GetCamera("/var/cloud/camera-sequrity/")
 }
 
 func dp(value float32) float32 {

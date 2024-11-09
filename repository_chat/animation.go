@@ -6,24 +6,24 @@ import (
 	"github.com/mahdi-cpp/api-go-gallery/utils"
 )
 
-var electronicDTO ElectronicDTO
+var animationDTO AnimationDTO
 
-type ElectronicDTO struct {
-	Caption     string       `json:"name"`
-	Electronics []Electronic `json:"electronics"`
+type AnimationDTO struct {
+	Caption    string      `json:"name"`
+	Animations []Animation `json:"animations"`
 }
 
-type Electronic struct {
+type Animation struct {
 	Name  string          `json:"name"`
 	Photo model.PhotoBase `json:"photo"`
 }
 
-func GetElectronic(folder string) ElectronicDTO {
+func GetAnimation(folder string) AnimationDTO {
 
 	var file = "data.txt"
 	var photos = cache.ReadOfFile(folder, file)
 	var count = len(photos)
-	var dto ElectronicDTO
+	var dto AnimationDTO
 
 	//if count > 50 {
 	//	count = 50
@@ -33,19 +33,20 @@ func GetElectronic(folder string) ElectronicDTO {
 	var nameIndex = 0
 
 	for i := 0; i < count; i++ {
-		var electronic Electronic
+		var animation Animation
 		if nameIndex >= len(utils.MovieNames) {
 			nameIndex = 0
 		}
 
-		electronic.Name = utils.MovieNames[nameIndex]
-		electronic.Photo = photos[index]
-		electronic.Photo.Key = -1
-		electronic.Photo.ThumbSize = 540
-		electronic.Photo.Crop = 1
-		electronic.Photo.Round = int(dp(10))
+		animation.Name = utils.MovieNames[nameIndex]
 
-		dto.Electronics = append(dto.Electronics, electronic)
+		animation.Photo = photos[index]
+		animation.Photo.Key = -1
+		animation.Photo.ThumbSize = 540
+		animation.Photo.PaintWidth = dp(70)
+		animation.Photo.PaintHeight = dp(120)
+
+		dto.Animations = append(dto.Animations, animation)
 		nameIndex++
 		index++
 	}

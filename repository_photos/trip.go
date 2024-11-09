@@ -39,14 +39,15 @@ func GetTrips(folder string) {
 	for i := 0; i < count; i++ {
 		var trip = Trip{}
 
-		if nameIndex >= len(utils.FackNames) {
+		if nameIndex >= len(utils.FackTrips) {
 			nameIndex = 0
 		}
 
-		trip.Name = utils.FackNames[nameIndex]
+		trip.Name = utils.FackTrips[nameIndex]
 		trip.Photo = photos[index]
 		trip.Photo.ThumbSize = 540
-		trip.Photo.Crop = true
+		trip.Photo.Crop = 1
+		trip.Photo.Round = 15
 		trip.Photo.Key = -1
 		trip.Photo.PaintWidth = photoSize
 		trip.Photo.PaintHeight = photoSize
@@ -62,7 +63,7 @@ func GetTrips(folder string) {
 		var photoBase model.PhotoBase
 		photoBase = photos[i]
 		photoBase.ThumbSize = 540
-		photoBase.Crop = true
+		photoBase.Crop = 1
 		photoBase.Key = -1
 		photoBase.PaintWidth = photoSize
 		photoBase.PaintHeight = photoSize

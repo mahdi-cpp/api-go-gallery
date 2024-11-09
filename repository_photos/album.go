@@ -3,11 +3,16 @@ package repository_photos
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"
 	"github.com/mahdi-cpp/api-go-gallery/model"
-	"strconv"
+	"github.com/mahdi-cpp/api-go-gallery/utils"
 )
 
-var albums []Album
-var shareAlbums []Album
+var albumDTO AlbumDTO
+
+var shareAlbumDTO AlbumDTO
+
+type AlbumDTO struct {
+	Albums []Album `json:"albums"`
+}
 
 type Album struct {
 	AlbumName1  string            `json:"albumName1"`
@@ -17,14 +22,15 @@ type Album struct {
 	PhotosTiny  []model.PhotoBase `json:"photosTiny"`
 }
 
-func GetAlbums(folder string) []Album {
+func GetAlbums(folder string) AlbumDTO {
 
 	var file = "data.txt"
 	var photos = cache.ReadOfFile(folder, file)
-	var albums []Album
+	var albumDTO AlbumDTO
 
 	var count = len(photos) / 10
 	var index = 0
+	var nameIndex = 0
 
 	var marginX = dp(20)
 	var screenWidthPhotosCount float32 = 1.2
@@ -38,12 +44,15 @@ func GetAlbums(folder string) []Album {
 
 	for i := 0; i < count; i++ {
 		var album = Album{}
-		album.AlbumName1 = "Camera " + strconv.Itoa(i)
-		album.AlbumName2 = "Camera " + strconv.Itoa(i+1)
+		if nameIndex+1 >= len(utils.FackNames) {
+			nameIndex = 0
+		}
+		album.AlbumName1 = utils.FackTrips[nameIndex]
+		album.AlbumName2 = utils.ShareAlbumTitles[nameIndex+1]
 
 		album.PhotoLarge1 = photos[index+1]
 		album.PhotoLarge1.ThumbSize = 270
-		album.PhotoLarge1.Crop = true
+		album.PhotoLarge1.Crop = 1
 		album.PhotoLarge1.Key = -1
 		album.PhotoLarge1.PaintWidth = photoSize
 		album.PhotoLarge1.PaintHeight = photoSize
@@ -52,7 +61,7 @@ func GetAlbums(folder string) []Album {
 
 		album.PhotoLarge2 = photos[index+2]
 		album.PhotoLarge2.ThumbSize = 270
-		album.PhotoLarge2.Crop = true
+		album.PhotoLarge2.Crop = 1
 		album.PhotoLarge2.Key = -1
 		album.PhotoLarge2.PaintWidth = photoSize
 		album.PhotoLarge2.PaintHeight = photoSize
@@ -63,7 +72,7 @@ func GetAlbums(folder string) []Album {
 			var photoBase model.PhotoBase
 			photoBase = photos[index+2+j]
 			photoBase.ThumbSize = 135
-			photoBase.Crop = true
+			photoBase.Crop = 1
 			photoBase.Key = -1
 			photoBase.PaintWidth = tinyPhoto
 			photoBase.PaintHeight = tinyPhoto
@@ -94,10 +103,11 @@ func GetAlbums(folder string) []Album {
 		album.PhotosTiny[7].Dx = photoSize + tinyPhoto + dp(4)
 		album.PhotosTiny[7].Dy = tinyPhoto + dp(2)
 
-		albums = append(albums, album)
+		albumDTO.Albums = append(albumDTO.Albums, album)
 
 		index += 10
+		nameIndex += 2
 	}
 
-	return albums
+	return albumDTO
 }

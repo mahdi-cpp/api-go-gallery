@@ -1,10 +1,16 @@
 package repository_photos
 
 import (
+	"fmt"
 	"github.com/mahdi-cpp/api-go-gallery/cache"
 	"github.com/mahdi-cpp/api-go-gallery/model"
-	"strconv"
 )
+
+var recentlyDTO RecentlyDTO
+
+type RecentlyDTO struct {
+	Days []RecentlyDay `json:"days"`
+}
 
 type RecentlyDay struct {
 	Name       string          `json:"name"`
@@ -14,15 +20,13 @@ type RecentlyDay struct {
 	PhotoTiny3 model.PhotoBase `json:"photoTiny3"`
 }
 
-var recentlyDTO []RecentlyDay
-
 func GetRecently(folder string) {
 
 	var file = "data.txt"
 	var photos = cache.ReadOfFile(folder, file)
 
-	recentlyDTO = []RecentlyDay{}
-	var count = (len(photos) / 4) - 4
+	recentlyDTO = RecentlyDTO{}
+	var count = ((len(photos) - 4) / 4) + 1
 	var index = 0
 
 	var marginX = dp(38)
@@ -31,28 +35,29 @@ func GetRecently(folder string) {
 	var photoSize = (1080 - (marginX * (screenWidthPhotosCount + 1))) / screenWidthPhotosCount
 	var tinyPhotoSize = photoSize / 3
 
-	if count > 50 {
-		count = 50
-	}
+	fmt.Println("recently count: ", count)
+
+	//if count > 15 {
+	//	count = 15
+	//}
 
 	for i := 0; i < count; i++ {
 		var album = RecentlyDay{}
-		album.Name = "Camera " + strconv.Itoa(i)
 
-		album.PhotoLarge = photos[index+1]
-		album.PhotoTiny1 = photos[index+2]
-		album.PhotoTiny2 = photos[index+3]
-		album.PhotoTiny3 = photos[index+4]
+		album.PhotoLarge = photos[index]
+		album.PhotoTiny1 = photos[index+1]
+		album.PhotoTiny2 = photos[index+2]
+		album.PhotoTiny3 = photos[index+3]
 
 		album.PhotoLarge.ThumbSize = 540
 		album.PhotoTiny1.ThumbSize = 135
 		album.PhotoTiny2.ThumbSize = 135
 		album.PhotoTiny3.ThumbSize = 135
 
-		album.PhotoLarge.Crop = true
-		album.PhotoTiny1.Crop = true
-		album.PhotoTiny2.Crop = true
-		album.PhotoTiny3.Crop = true
+		album.PhotoLarge.Crop = 1
+		album.PhotoTiny1.Crop = 1
+		album.PhotoTiny2.Crop = 1
+		album.PhotoTiny3.Crop = 1
 
 		album.PhotoLarge.Key = -1
 		album.PhotoTiny1.Key = -1
@@ -80,7 +85,7 @@ func GetRecently(folder string) {
 		album.PhotoTiny3.Dx = photoSize + dp(6.5)
 		album.PhotoTiny3.Dy = tinyPhotoSize + tinyPhotoSize + dp(4.5)
 
-		recentlyDTO = append(recentlyDTO, album)
+		recentlyDTO.Days = append(recentlyDTO.Days, album)
 
 		index += 4
 	}
