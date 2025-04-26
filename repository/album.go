@@ -1,4 +1,4 @@
-package repository_photos
+package repository
 
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"

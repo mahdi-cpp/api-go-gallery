@@ -1,4 +1,4 @@
-package repository_photos
+package repository
 
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"
@@ -20,14 +20,14 @@ func GetGalleries(folder string) {
 	var count = len(photos)
 	var index = 0
 
-	//if count > 50 {
-	//	count = 50
-	//}
-
 	for i := 0; i < count; i++ {
 		var photo = model.PhotoBase{}
 		photo = photos[index]
 		photo.Key = -1
+
+		photo.IsVideo = false
+		photo.VideoFormat = "mp4"
+
 		galleryDTO.Photos = append(galleryDTO.Photos, photo)
 		index++
 	}

@@ -1,4 +1,4 @@
-package repository_photos
+package repository
 
 import (
 	"fmt"
@@ -15,12 +15,12 @@ func InitPhotos() {
 	LayoutInit()
 
 	//GetGalleries("/var/cloud/reynardlowell/")
-	GetGalleries("/var/cloud/fa/")
+	GetGalleries("/var/cloud/00-instagram/lucaspopan/")
 
-	GetLion("/var/cloud/paris/")
+	GetLion("/var/cloud/id/fa/")
 	GetYears("/var/cloud/fa/")
 
-	GetRecently("/var/cloud/id/girl/")
+	GetRecently("/var/cloud/razzle/")
 
 	GetPeoples("/var/cloud/id/me/")
 	GetTrips("/var/cloud/paris/")
@@ -30,7 +30,7 @@ func InitPhotos() {
 	shareAlbumDTO = GetAlbums("/var/cloud/reynardlowell/")
 	cameraDTO = GetCameras("/var/cloud/id/go/")
 
-	GetGrid("/var/cloud/bb/")
+	GetGrid("/var/cloud/video/")
 
 	utils.GetCities()
 	utils.GetNames()

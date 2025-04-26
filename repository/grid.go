@@ -1,4 +1,4 @@
-package repository_photos
+package repository
 
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"
@@ -32,6 +32,8 @@ func GetGrid(folder string) {
 		photoBase.Crop = 1
 		photoBase.Round = int(dp(10))
 		photoBase.Key = -1
+		photoBase.VideoFormat = "mp4"
+		photoBase.IsVideo = true
 		gridDTO.Photos = append(gridDTO.Photos, photoBase)
 		index++
 	}

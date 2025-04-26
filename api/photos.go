@@ -2,8 +2,8 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/mahdi-cpp/api-go-gallery/repository"
 	"github.com/mahdi-cpp/api-go-gallery/repository_drawer"
-	"github.com/mahdi-cpp/api-go-gallery/repository_photos"
 	"net/http"
 	"strconv"
 )
@@ -16,7 +16,7 @@ func AddPhotosRoutes(rg *gin.RouterGroup) {
 		startIndex, _ := strconv.Atoi(context.Param("start"))
 		endIndex, _ := strconv.Atoi(context.Param("end"))
 
-		context.JSON(http.StatusOK, repository_photos.RestGrid(startIndex, endIndex))
+		context.JSON(http.StatusOK, repository.RestGrid(startIndex, endIndex))
 	})
 
 	route.GET("/people_drawer", func(context *gin.Context) {
@@ -28,7 +28,7 @@ func AddPhotosRoutes(rg *gin.RouterGroup) {
 	})
 
 	route.GET("/test", func(context *gin.Context) {
-		context.JSON(http.StatusOK, repository_photos.RestUser())
+		context.JSON(http.StatusOK, repository.RestUser())
 	})
 
 }

@@ -1,4 +1,4 @@
-package repository_photos
+package repository
 
 import (
 	"fmt"
