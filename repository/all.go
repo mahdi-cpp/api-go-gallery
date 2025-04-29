@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/mahdi-cpp/api-go-gallery/model"
 	"github.com/mahdi-cpp/api-go-gallery/utils"
@@ -56,15 +55,6 @@ func RestYears() map[string]any {
 	}
 }
 
-func RestLion() map[string]any {
-	return gin.H{
-		"photos":    lionDTO.Photos,
-		"icons":     lionDTO.Icons,
-		"titles":    lionDTO.Titles,
-		"subTitles": lionDTO.SubTitles,
-	}
-}
-
 func RestPeople() map[string]any {
 	return gin.H{
 		"personGroups": peopleDTO.PersonGroups,
@@ -95,18 +85,6 @@ func RestShareAlbums() map[string]any {
 func RestCameraDTO() map[string]any {
 	return gin.H{
 		"cameras": cameraDTO.Cameras,
-	}
-}
-
-func RestGrid(startIndex int, endIndex int) map[string]any {
-
-	fmt.Println("start:", startIndex)
-	fmt.Println("end:", endIndex)
-
-	return gin.H{
-		"totalItems": gridDTO.TotalItems,
-		"name":       gridDTO.Name,
-		"photos":     gridDTO.Photos[startIndex:endIndex],
 	}
 }
 

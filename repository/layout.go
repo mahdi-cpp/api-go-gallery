@@ -32,13 +32,10 @@ func LayoutInit() {
 	var ShareAlbumView = View{Name: "ShareAlbumView", Title: "Share Albums", Url: "share_albums"}
 
 	var GalleryView = View{Url: "gallery"}
-	//var YearsView = View{Name: "YearsView", Title: "Years View", Url: "years"}
 
-	//var LionView = View{Name: "LionView", Title: "Lion View", Url: "lion"}
 	var CustomView = View{Name: "CustomView", Title: "Custom View", Url: "CustomView"}
 
 	layout.Views = append(layout.Views, GalleryView)
-	//layout.Views = append(layout.Views, LionView)
 	layout.Views = append(layout.Views, RecentlyView)
 	layout.Views = append(layout.Views, PeopleView)
 
