@@ -23,7 +23,7 @@ func AddPhotosHomeRoutes(rg *gin.RouterGroup) {
 	route.GET("/people", func(context *gin.Context) {
 		context.JSON(http.StatusOK, repository.RestPeople())
 	})
-	route.GET("/recently", func(context *gin.Context) {
+	route.GET("/recent_days", func(context *gin.Context) {
 		context.JSON(http.StatusOK, repository.RestRecently())
 	})
 	route.GET("/trip", func(context *gin.Context) {
