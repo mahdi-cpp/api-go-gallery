@@ -32,12 +32,6 @@ func GetAlbums(folder string) AlbumDTO {
 	var index = 0
 	var nameIndex = 0
 
-	var marginX = dp(20)
-	var screenWidthPhotosCount float32 = 1.2
-	var photoSize = (1080 - (marginX * (screenWidthPhotosCount + 1))) / screenWidthPhotosCount
-	photoSize = photoSize / 3.8
-	var tinyPhoto = (photoSize - dp(2)) / 2.0
-
 	if count > 50 {
 		count = 50
 	}
@@ -54,8 +48,6 @@ func GetAlbums(folder string) AlbumDTO {
 		album.PhotoLarge1.ThumbSize = 270
 		album.PhotoLarge1.Crop = 1
 		album.PhotoLarge1.Key = -1
-		album.PhotoLarge1.PaintWidth = photoSize
-		album.PhotoLarge1.PaintHeight = photoSize
 		album.PhotoLarge1.Dx = 0
 		album.PhotoLarge1.Dy = 0
 
@@ -63,8 +55,6 @@ func GetAlbums(folder string) AlbumDTO {
 		album.PhotoLarge2.ThumbSize = 270
 		album.PhotoLarge2.Crop = 1
 		album.PhotoLarge2.Key = -1
-		album.PhotoLarge2.PaintWidth = photoSize
-		album.PhotoLarge2.PaintHeight = photoSize
 		album.PhotoLarge2.Dx = 0
 		album.PhotoLarge2.Dy = 0
 
@@ -74,34 +64,8 @@ func GetAlbums(folder string) AlbumDTO {
 			photoBase.ThumbSize = 135
 			photoBase.Crop = 1
 			photoBase.Key = -1
-			photoBase.PaintWidth = tinyPhoto
-			photoBase.PaintHeight = tinyPhoto
 			album.PhotosTiny = append(album.PhotosTiny, photoBase)
 		}
-
-		album.PhotosTiny[0].Dx = photoSize + dp(2)
-		album.PhotosTiny[0].Dy = 0
-
-		album.PhotosTiny[1].Dx = photoSize + dp(2)
-		album.PhotosTiny[1].Dy = tinyPhoto + dp(2)
-
-		album.PhotosTiny[2].Dx = photoSize + tinyPhoto + dp(4)
-		album.PhotosTiny[2].Dy = 0
-
-		album.PhotosTiny[3].Dx = photoSize + tinyPhoto + dp(4)
-		album.PhotosTiny[3].Dy = tinyPhoto + dp(2)
-
-		album.PhotosTiny[4].Dx = photoSize + dp(2)
-		album.PhotosTiny[4].Dy = 0
-
-		album.PhotosTiny[5].Dx = photoSize + dp(2)
-		album.PhotosTiny[5].Dy = tinyPhoto + dp(2)
-
-		album.PhotosTiny[6].Dx = photoSize + tinyPhoto + dp(4)
-		album.PhotosTiny[6].Dy = 0
-
-		album.PhotosTiny[7].Dx = photoSize + tinyPhoto + dp(4)
-		album.PhotosTiny[7].Dy = tinyPhoto + dp(2)
 
 		albumDTO.Albums = append(albumDTO.Albums, album)
 

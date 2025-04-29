@@ -9,8 +9,7 @@ import (
 var tripDTO TropeDTO
 
 type TropeDTO struct {
-	Trips           []Trip            `json:"trips"`
-	PhotoAnimations []model.PhotoBase `json:"photoAnimations"`
+	Trips []Trip `json:"trips"`
 }
 
 type Trip struct {
@@ -32,10 +31,6 @@ func GetTrips(folder string) {
 	var index = 0
 	var nameIndex = 0
 
-	var marginX = dp(35)
-	var screenWidthPhotosCount float32 = 1.55
-	var photoSize = (1080 - (marginX * (screenWidthPhotosCount + 1))) / screenWidthPhotosCount
-
 	for i := 0; i < count; i++ {
 		var trip = Trip{}
 
@@ -47,10 +42,8 @@ func GetTrips(folder string) {
 		trip.Photo = photos[index]
 		trip.Photo.ThumbSize = 540
 		trip.Photo.Crop = 1
-		trip.Photo.Round = 15
+		trip.Photo.Round = 20
 		trip.Photo.Key = -1
-		trip.Photo.PaintWidth = photoSize
-		trip.Photo.PaintHeight = photoSize
 		tripDTO.Trips = append(tripDTO.Trips, trip)
 
 		nameIndex++
@@ -58,15 +51,4 @@ func GetTrips(folder string) {
 	}
 
 	index = 0
-
-	for i := 0; i < 10; i++ {
-		var photoBase model.PhotoBase
-		photoBase = photos[i]
-		photoBase.ThumbSize = 540
-		photoBase.Crop = 1
-		photoBase.Key = -1
-		photoBase.PaintWidth = photoSize
-		photoBase.PaintHeight = photoSize
-		tripDTO.PhotoAnimations = append(tripDTO.PhotoAnimations, photoBase)
-	}
 }

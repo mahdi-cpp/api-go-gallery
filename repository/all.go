@@ -12,25 +12,24 @@ import (
 var root = "/"
 
 func InitPhotos() {
+
 	LayoutInit()
 
-	//GetGalleries("/var/cloud/reynardlowell/")
-	GetGalleries("/var/cloud/00-instagram/lucaspopan/")
+	//GetGalleries("/var/cloud/id/mahan/")
+	GetGalleries("/var/cloud/00-instagram/razzle/")
 
-	GetLion("/var/cloud/id/fa/")
+	GetRecently("/var/cloud/00-instagram/razzle-photo/")
+	GetPeoples("/var/cloud/00-instagram/ashtonhall/")
+	GetTrips("/var/cloud/id/mahan/")
+	GetPinned("/var/cloud/id/trip/")
+
 	GetYears("/var/cloud/fa/")
 
-	GetRecently("/var/cloud/razzle/")
-
-	GetPeoples("/var/cloud/id/me/")
-	GetTrips("/var/cloud/paris/")
-	GetPinned("/var/cloud/paris/")
-
 	albumDTO = GetAlbums("/var/cloud/id/me/")
-	shareAlbumDTO = GetAlbums("/var/cloud/reynardlowell/")
-	cameraDTO = GetCameras("/var/cloud/id/go/")
+	shareAlbumDTO = GetAlbums("/var/cloud/00-instagram/lucaspopan/")
+	cameraDTO = GetCameras("/var/cloud/00-instagram/nickloveswildlife/")
 
-	GetGrid("/var/cloud/video/")
+	//GetGrid("/var/cloud/00-instagram/video/")
 
 	utils.GetCities()
 	utils.GetNames()
@@ -68,8 +67,7 @@ func RestLion() map[string]any {
 
 func RestPeople() map[string]any {
 	return gin.H{
-		"personGroups":    peopleDTO.PersonGroups,
-		"photoAnimations": peopleDTO.PhotoAnimations,
+		"personGroups": peopleDTO.PersonGroups,
 	}
 }
 
@@ -80,8 +78,7 @@ func RestRecently() map[string]any {
 }
 func RestTrip() map[string]any {
 	return gin.H{
-		"trips":           tripDTO.Trips,
-		"photoAnimations": tripDTO.PhotoAnimations,
+		"trips": tripDTO.Trips,
 	}
 }
 func RestPinnedCollection() map[string]any {
@@ -97,11 +94,7 @@ func RestShareAlbums() map[string]any {
 }
 func RestCameraDTO() map[string]any {
 	return gin.H{
-		"cameras":                cameraDTO.Cameras,
-		"marginX":                cameraDTO.MarginX,
-		"screenWidthPhotosCount": cameraDTO.ScreenWidthPhotosCount,
-		"photoSize":              cameraDTO.PhotoSize,
-		"tinyPhoto":              cameraDTO.TinyPhoto,
+		"cameras": cameraDTO.Cameras,
 	}
 }
 

@@ -26,29 +26,28 @@ func LayoutInit() {
 
 	var RecentlyView = View{Name: "RecentlyView", Title: "Recently Days", Url: "recently"}
 
-	var PeopleView = View{Name: "PeopleView", Title: "People & Pet", Url: "people"}
+	var PeopleView = View{Name: "PeopleView", Title: "Peoples", Url: "people"}
 	var TripView = View{Name: "TripView", Title: "Trip", Url: "trip"}
 	var AlbumView = View{Name: "AlbumView", Title: "Albums", Url: "albums"}
 	var ShareAlbumView = View{Name: "ShareAlbumView", Title: "Share Albums", Url: "share_albums"}
 
 	var GalleryView = View{Url: "gallery"}
-	var YearsView = View{Name: "YearsView", Title: "Years View", Url: "years"}
-	var LionView = View{Name: "LionView", Title: "Lion View", Url: "lion"}
-	var CustomView = View{Name: "CustomView", Title: "Custom View", Url: "nothing"}
+	//var YearsView = View{Name: "YearsView", Title: "Years View", Url: "years"}
+
+	//var LionView = View{Name: "LionView", Title: "Lion View", Url: "lion"}
+	var CustomView = View{Name: "CustomView", Title: "Custom View", Url: "CustomView"}
 
 	layout.Views = append(layout.Views, GalleryView)
-	layout.Views = append(layout.Views, LionView)
-
+	//layout.Views = append(layout.Views, LionView)
 	layout.Views = append(layout.Views, RecentlyView)
 	layout.Views = append(layout.Views, PeopleView)
+
 	layout.Views = append(layout.Views, TripView)
 	layout.Views = append(layout.Views, PinnedCollections)
 	layout.Views = append(layout.Views, AlbumView)
 	layout.Views = append(layout.Views, ShareAlbumView)
+	//layout.Views = append(layout.Views, YearsView)
 	layout.Views = append(layout.Views, CameraTypeView)
-
-	layout.Views = append(layout.Views, YearsView)
-
 	layout.Views = append(layout.Views, CustomView)
 
 	layout.AspectRatio = config.CurrentLayout.AspectRatio

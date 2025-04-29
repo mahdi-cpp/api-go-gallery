@@ -30,10 +30,6 @@ func GetPinned(folder string) {
 	var index = 0
 	var nameIndex = 0
 
-	var marginX = dp(15)
-	var screenWidthPhotosCount float32 = 3.2
-	var photoSize = (1080 - (marginX * (screenWidthPhotosCount + 1))) / screenWidthPhotosCount
-
 	for i := 0; i < count; i++ {
 		if nameIndex >= len(utils.FackNames) {
 			nameIndex = 0
@@ -46,8 +42,6 @@ func GetPinned(folder string) {
 		pinned.Photo.Crop = 1
 		pinned.Photo.Round = int(dp(10))
 		pinned.Photo.Key = -1
-		pinned.Photo.PaintWidth = photoSize
-		pinned.Photo.PaintHeight = photoSize
 
 		pinnedCollectionDTO.PinnedCollections = append(pinnedCollectionDTO.PinnedCollections, pinned)
 

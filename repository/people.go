@@ -9,8 +9,7 @@ import (
 var peopleDTO PeopleDTO
 
 type PeopleDTO struct {
-	PersonGroups    []PersonGroup     `json:"personGroups"`
-	PhotoAnimations []model.PhotoBase `json:"photoAnimations"`
+	PersonGroups []PersonGroup `json:"personGroups"`
 }
 
 type PersonGroup struct {
@@ -28,8 +27,8 @@ func GetPeoples(folder string) {
 
 	var count = (len(photos) / 4) - 4
 
-	if count > 5 {
-		count = 5
+	if count > 15 {
+		count = 15
 	}
 
 	var index = 0
@@ -79,13 +78,4 @@ func GetPeoples(folder string) {
 	}
 
 	index = 0
-
-	for i := 0; i < 10; i++ {
-		var photoBase model.PhotoBase
-		photoBase = photos[i]
-		photoBase.ThumbSize = 540
-		photoBase.Crop = 1
-		photoBase.Key = -1
-		peopleDTO.PhotoAnimations = append(peopleDTO.PhotoAnimations, photoBase)
-	}
 }

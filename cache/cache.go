@@ -67,6 +67,11 @@ var folders = []string{
 	"/var/cloud/chat/map/",
 	"/var/cloud/chat/voice/",
 
+	"/var/cloud/chat/pdf/thumbnail/",
+	"/var/cloud/chat/electronic/thumbnail/",
+	"/var/cloud/chat/map/thumbnail/",
+	"/var/cloud/chat/voice/thumbnail/",
+
 	"/var/cloud/call2/",
 	"/var/cloud/call2/thumbnail/",
 
@@ -77,10 +82,8 @@ var folders = []string{
 	"/var/cloud/id/trip/thumbnail/",
 	"/var/cloud/id/go/thumbnail/",
 
-	"/var/cloud/chat/pdf/thumbnail/",
-	"/var/cloud/chat/electronic/thumbnail/",
-	"/var/cloud/chat/map/thumbnail/",
-	"/var/cloud/chat/voice/thumbnail/",
+	"/var/cloud/chat_users/",
+	"/var/cloud/chat_users/thumbnail/",
 
 	"/var/cloud/tinyhome/new/",
 	"/var/cloud/tinyhome/new/thumbnail/",
@@ -103,6 +106,9 @@ var folders = []string{
 
 	"/var/cloud/00-instagram/razzle/",
 	"/var/cloud/00-instagram/razzle/thumbnail/",
+
+	"/var/cloud/00-instagram/nickloveswildlife/",
+	"/var/cloud/00-instagram/nickloveswildlife/thumbnail/",
 }
 
 var iconFolder = "/var/cloud/icons/"

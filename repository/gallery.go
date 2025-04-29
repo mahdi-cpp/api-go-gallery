@@ -24,19 +24,16 @@ func GetGalleries(folder string) {
 		var photo = model.PhotoBase{}
 		photo = photos[index]
 		photo.Key = -1
-
-		photo.IsVideo = false
+		photo.IsVideo = true
 		photo.VideoFormat = "mp4"
-
 		galleryDTO.Photos = append(galleryDTO.Photos, photo)
 		index++
 	}
 
 	var photo = model.PhotoBase{}
 	photo.Key = -1
-	photo.Name = "00044"
+	photo.Name = "chat_29"
 	photo.ThumbSize = 540
-	photo.FileType = ".jpg"
 	photo.Width = int(dp(33))
 	photo.Height = int(dp(33))
 	photo.PaintWidth = dp(33)

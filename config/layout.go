@@ -7,8 +7,8 @@ type Layout struct {
 }
 
 var CurrentLayout = Layout{
-	CellItemCount: 4,
-	AspectRatio:   true,
+	CellItemCount: 5,
+	AspectRatio:   false,
 	ThumbSize:     270,
 }
 
