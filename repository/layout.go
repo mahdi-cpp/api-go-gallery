@@ -1,16 +1,12 @@
 package repository
 
-import (
-	"github.com/mahdi-cpp/api-go-gallery/config"
-)
-
 var layout Layout
 
 type Layout struct {
-	Views         []View `json:"views"`
-	CellItemCount int    `json:"cellItemCount"`
-	AspectRatio   bool   `json:"aspectRatio"`
-	ThumbSize     int    `json:"thumbSize"`
+	Views []View `json:"views"`
+	//CellItemCount int    `json:"cellItemCount"`
+	//AspectRatio   bool   `json:"aspectRatio"`
+	//ThumbSize     int    `json:"thumbSize"`
 }
 
 type View struct {
@@ -42,16 +38,6 @@ func LayoutInit() {
 	layout.Views = append(layout.Views, ShareAlbumView)
 	layout.Views = append(layout.Views, CameraTypeView)
 	layout.Views = append(layout.Views, CustomView)
-
-	layout.AspectRatio = config.CurrentLayout.AspectRatio
-	layout.CellItemCount = config.CurrentLayout.CellItemCount
-	layout.ThumbSize = config.CurrentLayout.ThumbSize
-
-	//for i, _ := range layout.Views {
-	//for i := len(layout.Views) - 1; i >= 0; i-- {
-	//	offset -= layout.Views[i].Height
-	//	layout.Views[i].ScrollY = offset
-	//}
 
 	layout = layout
 

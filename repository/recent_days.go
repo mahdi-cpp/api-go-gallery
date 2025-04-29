@@ -28,8 +28,8 @@ func GetRecently(folder string) {
 	var count = ((len(photos) - 4) / 4) + 1
 	var index = 0
 
-	if count > 15 {
-		count = 15
+	if count > 50 {
+		count = 50
 	}
 
 	for i := 0; i < count; i++ {

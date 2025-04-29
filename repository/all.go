@@ -36,10 +36,7 @@ func InitPhotos() {
 
 func RestLayout() map[string]any {
 	return gin.H{
-		"views":         layout.Views,
-		"cellItemCount": layout.CellItemCount,
-		"aspectRatio":   layout.AspectRatio,
-		"thumbSize":     layout.ThumbSize,
+		"views": layout.Views,
 	}
 }
 
