@@ -3,7 +3,6 @@ package repository
 import (
 	"github.com/mahdi-cpp/api-go-gallery/cache"
 	"github.com/mahdi-cpp/api-go-gallery/model"
-	"github.com/mahdi-cpp/api-go-gallery/utils"
 	"strconv"
 )
 
@@ -14,15 +13,15 @@ type YearsDTO struct {
 }
 
 type Year struct {
-	Title string          `json:"title"`
-	Photo model.PhotoBase `json:"photo"`
+	Title string        `json:"title"`
+	Photo model.UIImage `json:"photo"`
 }
 
 func GetYears(folder string) {
 
 	var file = "data.txt"
-	photos := cache.ReadOfFile(folder, file)
-	var count = len(photos)
+	uiImages := cache.ReadOfFile(folder, file)
+	var count = len(uiImages)
 
 	var index = 0
 
@@ -34,15 +33,7 @@ func GetYears(folder string) {
 
 	for i := 0; i < count; i++ {
 		var year = Year{}
-		year.Photo = photos[index]
-		year.Photo.Key = -1
-		year.Photo.Crop = 1
-		year.Photo.Round = 20
-		year.Photo.ThumbSize = 540
-		year.Photo.PaintWidth = float32(utils.ScreenWidth) - dp(30)
-		year.Photo.PaintHeight = float32(utils.ScreenWidth * 0.70)
-		year.Photo.Dx = dp(15)
-
+		year.Photo = uiImages[index]
 		year.Title = "" + strconv.Itoa(yearsCount)
 
 		yearsDTO.Years = append(yearsDTO.Years, year)

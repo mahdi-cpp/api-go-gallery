@@ -1,44 +1,105 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/mahdi-cpp/api-go-gallery/cache"
 	"github.com/mahdi-cpp/api-go-gallery/model"
+	"os"
+	"path/filepath"
+	"strings"
 )
 
 type GalleryDTO struct {
-	Avatar model.PhotoBase   `json:"avatar"`
-	Photos []model.PhotoBase `json:"photos"`
+	Images []model.UIImage `json:"images"`
 }
 
 var galleryDTO GalleryDTO
-var photoBaseArray []model.PhotoBase
+var imagesArray []model.UIImage
 
-func GetGalleries(folder string) {
+func GetGalleries(folder string, IsVideo bool) {
 
 	var file = "data.txt"
-	photos := cache.ReadOfFile(folder, file)
-	var count = len(photos)
+	uiImages := cache.ReadOfFile(folder, file)
+	var count = len(uiImages)
 	var index = 0
 
-	for i := 0; i < count; i++ {
-		var photo = model.PhotoBase{}
-		photo = photos[index]
-		photo.Key = -1
-		photo.IsVideo = true
-		photo.VideoFormat = "mp4"
-		galleryDTO.Photos = append(galleryDTO.Photos, photo)
-		index++
+	dir := "/home/mahdi/files/"
+	videoFormats, err := ListVideoFormatsInDirectory(dir)
+	if err != nil {
+		fmt.Println("Error reading directory:", err)
+		return
 	}
 
-	var photo = model.PhotoBase{}
-	photo.Key = -1
-	photo.Name = "chat_29"
-	photo.ThumbSize = 540
-	photo.Width = int(dp(33))
-	photo.Height = int(dp(33))
-	photo.PaintWidth = dp(33)
-	photo.PaintHeight = dp(33)
-	photo.Circle = true
-	galleryDTO.Avatar = photo
+	for i := 0; i < count; i++ {
+		var image = model.UIImage{}
+		image = uiImages[index]
+		image.VideoInfo = model.VideoInfo{
+			HasSubtitle:     true,
+			IsVideo:         IsVideo,
+			HasVideoControl: false,
+			VideoFormat:     videoFormats[image.Name],
+		}
 
+		galleryDTO.Images = append(galleryDTO.Images, image)
+		index++
+	}
+}
+
+// ListVideoFormatsInDirectory reads a directory and returns a map of video formats.
+func ListVideoFormatsInDirectory(dir string) (map[string]string, error) {
+	videoInfoArray := make(map[string]string)
+
+	// Read the directory
+	files, err := os.ReadDir(dir)
+	if err != nil {
+		return nil, err
+	}
+
+	// Check each file
+	for _, file := range files {
+		if !file.IsDir() { // Skip directories
+			filename := file.Name()
+			format, err := GetVideoFormat(filename)
+			if err == nil {
+				//// Retrieve video duration
+				//duration, err := getVideoDuration(filepath.Join(dir, filename))
+				//if err != nil {
+				//	fmt.Println("Error getting duration:", err)
+				//	continue
+				//}
+
+				filename = strings.ReplaceAll(filename, ".mp4", "")
+				filename = strings.ReplaceAll(filename, ".mkv", "")
+				videoInfoArray[filename] = format
+				//VideoInfo{Format: format}
+				//videoInfoArray. = format // Store the filename and format
+				//VideoInfo[filename] = map[string]interface{}{
+				//	"format":   format,
+				//	"duration": duration,
+				//}
+				fmt.Println(filename)
+			} else {
+				// Optionally log the unsupported format
+				fmt.Println(err)
+			}
+		}
+	}
+
+	return videoInfoArray, nil
+}
+
+// GetVideoFormat returns the video format based on the file extension.
+func GetVideoFormat(filename string) (string, error) {
+	// Get the file extension
+	ext := strings.ToLower(filepath.Ext(filename))
+
+	// Check for video formats
+	switch ext {
+	case ".mp4":
+		return "mp4", nil
+	case ".mkv":
+		return "mkv", nil
+	default:
+		return "", fmt.Errorf("unsupported video format: %s", ext)
+	}
 }

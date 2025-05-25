@@ -1,35 +1,24 @@
 package model
 
-type PhotoBase struct {
-	Key             int     `json:"key" default:"-1"`
-	Name            string  `json:"name"`
-	FileType        string  `json:"fileType"`
-	Orientation     int     `json:"orientation"`
-	Width           int     `json:"width"`
-	Height          int     `json:"height"`
-	Circle          bool    `json:"circle,omitempty"`
-	Round           int     `json:"round,omitempty"`
-	Crop            int     `json:"crop,omitempty"`
-	AspectRatio     float32 `json:"aspectRatio,omitempty"`
-	ThumbSize       int     `json:"thumbSize,omitempty"`
-	PaintWidth      float32 `json:"paintWidth,omitempty"`
-	PaintHeight     float32 `json:"paintHeight,omitempty"`
-	Dx              float32 `json:"dx,omitempty"`
-	Dy              float32 `json:"dy,omitempty"`
-	IsVideo         bool    `json:"isVideo"`
-	VideoDuration   int     `json:"videoDuration"`
-	HasSubtitle     bool    `json:"hasSubtitle"`
-	VideoFormat     string  `json:"videoFormat"`
-	HasVideoControl bool    `json:"hasVideoControl"`
+// UIImage An object that manages image data in your app.
+type UIImage struct {
+	Name        string    `json:"name"`
+	FileType    string    `json:"fileType"`
+	Orientation int       `json:"orientation"`
+	AspectRatio float32   `json:"aspectRatio"`
+	Size        CGSize    `json:"size"`
+	VideoInfo   VideoInfo `json:"videoInfo"`
 }
 
-type IconBase struct {
-	Key    int     `json:"key"`
-	Name   string  `json:"name"`
-	Width  int     `json:"width,omitempty"`
-	Height int     `json:"height,omitempty"`
-	Dx     float32 `json:"dx,omitempty"`
-	Dy     float32 `json:"dy,omitempty"`
-	Color  int     `json:"color,omitempty"`
-	Alpha  int     `json:"alpha,omitempty"`
+type CGSize struct {
+	Width  float32 `json:"width"`
+	Height float32 `json:"height"`
+}
+
+type VideoInfo struct {
+	IsVideo         bool   `json:"isVideo"`
+	VideoDuration   int    `json:"videoDuration"`
+	HasSubtitle     bool   `json:"hasSubtitle"`
+	VideoFormat     string `json:"videoFormat"`
+	HasVideoControl bool   `json:"hasVideoControl"`
 }

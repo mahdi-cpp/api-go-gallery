@@ -13,49 +13,36 @@ type CameraDTO struct {
 }
 
 type Camera struct {
-	Name       string            `json:"name"`
-	PhotoLarge model.PhotoBase   `json:"photoLarge"`
-	PhotosTiny []model.PhotoBase `json:"photosTiny"`
+	Name   string          `json:"name"`
+	Images []model.UIImage `json:"images"`
 }
 
 func GetCameras(folder string) CameraDTO {
 
 	var file = "data.txt"
-	var photos = cache.ReadOfFile(folder, file)
+	var uiImages = cache.ReadOfFile(folder, file)
 	var cameraDTO CameraDTO
 
-	var count = len(photos) / 5
+	var count = len(uiImages) / 6
 	var index = 0
 
 	var nameIndex = 0
+	if count > 30 {
+		count = 30
+	}
 
 	for i := 0; i < count; i++ {
 		var camera = Camera{}
 		camera.Name = utils.CameraNames[nameIndex]
 
-		camera.PhotoLarge = photos[index+2]
-		camera.PhotoLarge.ThumbSize = 540
-		camera.PhotoLarge.Crop = 1
-		camera.PhotoLarge.Key = -1
-		camera.PhotoLarge.PaintWidth = 0
-		camera.PhotoLarge.PaintHeight = 0
-		camera.PhotoLarge.Dx = 0
-		camera.PhotoLarge.Dy = 0
-
-		for j := 0; j < 4; j++ {
-			var photoBase model.PhotoBase
-			photoBase = photos[index+1+j]
-			photoBase.ThumbSize = 270
-			photoBase.Crop = 1
-			photoBase.Key = -1
-			photoBase.PaintWidth = 0
-			photoBase.PaintHeight = 0
-			camera.PhotosTiny = append(camera.PhotosTiny, photoBase)
+		for j := 0; j < 6; j++ {
+			var image model.UIImage
+			image = uiImages[index+2+j]
+			camera.Images = append(camera.Images, image)
 		}
 
 		cameraDTO.Cameras = append(cameraDTO.Cameras, camera)
-
-		index += 5
+		index += 6
 		nameIndex += 1
 	}
 

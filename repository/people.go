@@ -9,23 +9,23 @@ import (
 var peopleDTO PeopleDTO
 
 type PeopleDTO struct {
-	PersonGroups []PersonGroup `json:"personGroups"`
+	PeopleGroup []PeopleGroup `json:"peopleGroup"`
 }
 
-type PersonGroup struct {
-	Names  []string        `json:"names"`
-	Photo1 model.PhotoBase `json:"photo1"`
-	Photo2 model.PhotoBase `json:"photo2"`
-	Photo3 model.PhotoBase `json:"photo3"`
-	Photo4 model.PhotoBase `json:"photo4"`
+type PeopleGroup struct {
+	Names  []string      `json:"names"`
+	Photo1 model.UIImage `json:"photo1"`
+	Photo2 model.UIImage `json:"photo2"`
+	Photo3 model.UIImage `json:"photo3"`
+	Photo4 model.UIImage `json:"photo4"`
 }
 
 func GetPeoples(folder string) {
 
 	var file = "data.txt"
-	var photos = cache.ReadOfFile(folder, file)
+	var uiImages = cache.ReadOfFile(folder, file)
 
-	var count = (len(photos) / 4) - 4
+	var count = (len(uiImages) / 4) - 4
 
 	if count > 15 {
 		count = 15
@@ -35,7 +35,7 @@ func GetPeoples(folder string) {
 	var nameIndex = 0
 
 	for i := 0; i < count; i++ {
-		var personGroup = PersonGroup{}
+		var personGroup = PeopleGroup{}
 
 		if nameIndex+4 >= len(utils.FackNames) {
 			nameIndex = 0
@@ -46,32 +46,12 @@ func GetPeoples(folder string) {
 		personGroup.Names = append(personGroup.Names, utils.FackNames[nameIndex+2])
 		personGroup.Names = append(personGroup.Names, utils.FackNames[nameIndex+3])
 
-		personGroup.Photo1 = photos[index+1]
-		personGroup.Photo2 = photos[index+2]
-		personGroup.Photo3 = photos[index+3]
-		personGroup.Photo4 = photos[index+4]
+		personGroup.Photo1 = uiImages[index+1]
+		personGroup.Photo2 = uiImages[index+2]
+		personGroup.Photo3 = uiImages[index+3]
+		personGroup.Photo4 = uiImages[index+4]
 
-		personGroup.Photo1.ThumbSize = 270
-		personGroup.Photo2.ThumbSize = 270
-		personGroup.Photo3.ThumbSize = 270
-		personGroup.Photo4.ThumbSize = 270
-
-		personGroup.Photo1.Round = int(dp(10))
-		personGroup.Photo2.Round = int(dp(10))
-		personGroup.Photo3.Round = int(dp(10))
-		personGroup.Photo4.Round = int(dp(10))
-
-		personGroup.Photo1.Crop = 1
-		personGroup.Photo2.Crop = 1
-		personGroup.Photo3.Crop = 1
-		personGroup.Photo4.Crop = 1
-
-		personGroup.Photo1.Key = -1
-		personGroup.Photo2.Key = -1
-		personGroup.Photo3.Key = -1
-		personGroup.Photo4.Key = -1
-
-		peopleDTO.PersonGroups = append(peopleDTO.PersonGroups, personGroup)
+		peopleDTO.PeopleGroup = append(peopleDTO.PeopleGroup, personGroup)
 
 		nameIndex++
 		index += 4

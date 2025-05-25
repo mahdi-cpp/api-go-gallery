@@ -4,7 +4,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/mahdi-cpp/api-go-gallery/model"
 	"github.com/mahdi-cpp/api-go-gallery/utils"
-	"math"
 	"sync"
 )
 
@@ -12,76 +11,97 @@ var root = "/"
 
 func InitPhotos() {
 
-	LayoutInit()
+	//GetGalleries("/var/cloud/9/", false)
+	GetGalleries("/var/cloud/id/mahan/", false)
+	//GetGalleries("/var/cloud/fa/", false)
+	//GetGalleries("/var/cloud/00-instagram/razzle-photo/", false)
+	//GetGalleries("/var/cloud/00-instagram/razzle/", true)
+	//GetGalleries("/var/cloud/00-instagram/ashtonhall/", true)
+	//GetGalleries("/var/cloud/00-instagram/video/", true)
 
-	//GetGalleries("/var/cloud/id/mahan/")
-	GetGalleries("/var/cloud/00-instagram/razzle/")
+	var a = "/var/cloud/00-instagram/razzle-photo/"
+	var m = "/var/cloud/id/mahan/"
 
-	GetRecently("/var/cloud/00-instagram/razzle-photo/")
+	GetProfile()
+	GetRecently(m)
 	GetPeoples("/var/cloud/00-instagram/ashtonhall/")
-	GetTrips("/var/cloud/id/mahan/")
-	GetPinned("/var/cloud/id/trip/")
+	GetTrips(m)
+
+	GetPinned("/var/cloud/id/mahan/")
+	GetPinnedGallery(a)
 
 	GetYears("/var/cloud/fa/")
 
-	albumDTO = GetAlbums("/var/cloud/id/me/")
-	shareAlbumDTO = GetAlbums("/var/cloud/00-instagram/lucaspopan/")
-	cameraDTO = GetCameras("/var/cloud/00-instagram/nickloveswildlife/")
+	albumDTO = GetAlbums(a)
 
-	//GetGrid("/var/cloud/00-instagram/video/")
+	//shareAlbumDTO = GetShareAlbums("/var/cloud/id/mahan/")
+	shareAlbumDTO = GetShareAlbums("/var/cloud/fa/")
+
+	cameraDTO = GetCameras(a)
 
 	utils.GetCities()
 	utils.GetNames()
 }
 
-func RestLayout() map[string]any {
+var newSubTitle *SubtitleDTO
+
+func RestSubtitle() map[string]any {
 	return gin.H{
-		"views": layout.Views,
+		"name":          newSubTitle.Name,
+		"subtitleItems": newSubTitle.Subtitles,
+	}
+}
+
+func ReloadSubtitle() {
+	newSubTitle, _ = GetSubtitle()
+}
+
+func RestFeed() map[string]any {
+	return gin.H{
+		"profileDTO":          profileDTO,
+		"galleryDTO":          galleryDTO,
+		"recentDaysDTO":       recentDaysDTO,
+		"peopleDTO":           peopleDTO,
+		"tripDTO":             tripDTO,
+		"pinnedCollectionDTO": pinnedCollectionDTO,
+		"albumDTO":            albumDTO,
+		"shareAlbumDTO":       shareAlbumDTO,
+		"cameraDTO":           cameraDTO,
 	}
 }
 
 func RestGallery() map[string]any {
 	return gin.H{
-		"avatar": galleryDTO.Avatar,
-		"photos": galleryDTO.Photos,
-	}
-}
-func RestYears() map[string]any {
-	return gin.H{
-		"years": yearsDTO.Years,
+		"galleryDTO": galleryDTO,
 	}
 }
 
-func RestPeople() map[string]any {
+func RestRecentDays() map[string]any {
 	return gin.H{
-		"personGroups": peopleDTO.PersonGroups,
+		"recentDaysDTO": recentDaysDTO,
 	}
 }
 
-func RestRecently() map[string]any {
+func RestCamera() map[string]any {
 	return gin.H{
-		"days": recentlyDTO.Days,
+		"cameraDTO": cameraDTO,
 	}
 }
-func RestTrip() map[string]any {
-	return gin.H{
-		"trips": tripDTO.Trips,
-	}
-}
-func RestPinnedCollection() map[string]any {
-	return gin.H{
-		"pinnedCollections": pinnedCollectionDTO.PinnedCollections,
-	}
-}
+
 func RestAlbums() map[string]any {
-	return gin.H{"albums": albumDTO.Albums}
-}
-func RestShareAlbums() map[string]any {
-	return gin.H{"albums": shareAlbumDTO.Albums}
-}
-func RestCameraDTO() map[string]any {
 	return gin.H{
-		"cameras": cameraDTO.Cameras,
+		"albumDTO": albumDTO,
+	}
+}
+
+func RestTrips() map[string]any {
+	return gin.H{
+		"tripDTO": tripDTO,
+	}
+}
+func RestPinnedCollections() map[string]any {
+	return gin.H{
+		"pinnedCollectionDTO": pinnedCollectionDTO2,
 	}
 }
 
@@ -92,7 +112,6 @@ type User struct {
 }
 
 func RestUser() map[string]any {
-
 	return gin.H{
 		"Id":    "12",
 		"name":  "Mahdi",
@@ -100,14 +119,7 @@ func RestUser() map[string]any {
 	}
 }
 
-type PhotoBaseCache struct {
+type UIImageCache struct {
 	sync.RWMutex
-	Cache map[int]model.PhotoBase
-}
-
-func dp(value float32) float32 {
-	if value == 0 {
-		return 0
-	}
-	return float32(math.Ceil(float64(2.625 * value)))
+	Cache map[int]model.UIImage
 }

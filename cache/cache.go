@@ -2,7 +2,6 @@ package cache
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"github.com/mahdi-cpp/api-go-gallery/model"
 	"image"
@@ -94,6 +93,8 @@ var folders = []string{
 	"/var/cloud/video/",
 	"/var/cloud/video/thumbnail/",
 
+	"/var/cloud/elec/",
+	"/var/cloud/elec//thumbnail/",
 	//----------------------------------------------------
 	"/var/cloud/00-instagram/razzle-photo/",
 	"/var/cloud/00-instagram/razzle-photo/thumbnail/",
@@ -109,31 +110,34 @@ var folders = []string{
 
 	"/var/cloud/00-instagram/nickloveswildlife/",
 	"/var/cloud/00-instagram/nickloveswildlife/thumbnail/",
+
+	"/var/cloud/00-instagram/video/",
+	"/var/cloud/00-instagram/video/thumbnail/",
 }
 
 var iconFolder = "/var/cloud/icons/"
 
-func ReadOfFile(folder string, file string) []model.PhotoBase {
-
-	var photos []model.PhotoBase
-
-	// Open the file for reading
-	f, err := os.Open(folder + file)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-		return nil
-	}
-	defer f.Close() // Ensure the file is closed when we're done
-
-	// Create a JSON decoder and decode the data into the slice
-	decoder := json.NewDecoder(f)
-	if err := decoder.Decode(&photos); err != nil {
-		fmt.Println("Error decoding JSON:", err)
-		return nil
-	}
-
-	return photos
-}
+//func ReadOfFile(folder string, file string) []model.UIImage {
+//
+//	var photos []model.UIImage
+//
+//	// Open the file for reading
+//	f, err := os.Open(folder + file)
+//	if err != nil {
+//		fmt.Println("Error opening file:", err)
+//		return nil
+//	}
+//	defer f.Close() // Ensure the file is closed when we're done
+//
+//	// Create a JSON decoder and decode the data into the slice
+//	decoder := json.NewDecoder(f)
+//	if err := decoder.Decode(&photos); err != nil {
+//		fmt.Println("Error decoding JSON:", err)
+//		return nil
+//	}
+//
+//	return photos
+//}
 
 func ReadIcons() {
 	// Specify the directory you want to read
@@ -305,9 +309,9 @@ func (g *IDGenerator) NextID() int {
 
 var IdGen = NewIDGenerator()
 
-type PhotoBaseCache struct {
+type UIImageCache struct {
 	sync.RWMutex
-	Cache map[int]model.PhotoBase
+	Cache map[int]model.UIImage
 }
 
-var PhotoBaseMemory = PhotoBaseCache{Cache: make(map[int]model.PhotoBase)}
+var UIImageMemory = UIImageCache{Cache: make(map[int]model.UIImage)}
